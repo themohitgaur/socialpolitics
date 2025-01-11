@@ -1,0 +1,6 @@
+@SocialPolitics_HostAddress = http://localhost:5022
+
+GET {{SocialPolitics_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
