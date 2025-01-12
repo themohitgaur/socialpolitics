@@ -1,6 +1,5 @@
-﻿namespace UserManagementService.Api.ApiModels
+﻿namespace SocialPolitics.UserManagementService.Api.ApiModels;
+
+public class UpdateUserRequest
 {
-    public class UpdateUserRequest
-    {
-    }
 }
