@@ -3,7 +3,7 @@ using MediatR;
 using SocialPolitics.UserManagementService.Api.ApiModels;
 using SocialPolitics.UserManagementService.Repositories.Interfaces;
 
-namespace SocialPolitics.UserManagementService.Handlers.Queries.GetAll;
+namespace SocialPolitics.UserManagementService.Handlers.Users.Queries.GetAll;
 
 internal class Handler(IUserRepository userRepository, IMapper mapper) : IRequestHandler<Request, Response>
 {
@@ -13,7 +13,7 @@ internal class Handler(IUserRepository userRepository, IMapper mapper) : IReques
     {
         var users = await _userRepository.GetAllUserAsync(cancellation);
         // Mapping a list using AutoMapper
-        List<UserApiModel> userApiModels = _mapper.Map<List<UserApiModel>>(users); 
+        List<UserApiModel> userApiModels = _mapper.Map<List<UserApiModel>>(users);
 
         return new Response(userApiModels);
     }

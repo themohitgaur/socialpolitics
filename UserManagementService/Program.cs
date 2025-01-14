@@ -1,9 +1,11 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using SocialPolitics.UserManagementService;
 using SocialPolitics.UserManagementService.Infrastructure.Data.Context;
+using SocialPolitics.UserManagementService.Infrastructure.Data.Models;
 using SocialPolitics.UserManagementService.Repositories;
 using SocialPolitics.UserManagementService.Repositories.Interfaces;
 using System.Reflection;
@@ -46,7 +48,7 @@ builder.Services.AddSingleton<IMongoDatabase>(s =>
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<UserManagementContext>();
-
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

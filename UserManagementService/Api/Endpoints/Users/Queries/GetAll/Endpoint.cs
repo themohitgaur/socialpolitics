@@ -1,8 +1,8 @@
 ﻿using SocialPolitics.UserManagementService.Infrastructure.Data.Models;
-using SocialPolitics.UserManagementService.Handlers.Queries.GetAll;
 using MediatR;
 using FastEndpoints;
 using System.Net.Mime;
+using SocialPolitics.UserManagementService.Handlers.Users.Queries.GetAll;
 
 namespace SocialPolitics.UserManagementService.Api.Endpoints.Users.Queries.GetAll;
 
