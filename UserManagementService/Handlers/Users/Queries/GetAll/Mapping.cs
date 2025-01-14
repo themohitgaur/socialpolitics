@@ -2,7 +2,7 @@
 using SocialPolitics.UserManagementService.Api.ApiModels;
 using SocialPolitics.UserManagementService.Infrastructure.Data.Models;
 
-namespace SocialPolitics.UserManagementService.Handlers.Queries.GetAll;
+namespace SocialPolitics.UserManagementService.Handlers.Users.Queries.GetAll;
 public class UserMappingProfile : Profile
 {
     public UserMappingProfile()
