@@ -10,7 +10,7 @@ public class Endpoint(IMediator _mediator) : Endpoint<Request, Response>
 {
     public override void Configure()
     {
-        Post(Users.Routes.Users);
+        Post(Users.Routes.RegisterUsers);
         Description(builder => builder.Produces<IEnumerable<User>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json));
         AllowAnonymous();
     }
@@ -18,6 +18,6 @@ public class Endpoint(IMediator _mediator) : Endpoint<Request, Response>
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
         var result = await _mediator.Send(req, ct); // Pass the incoming request (req) to the handler
-        await SendAsync((Response)result, StatusCodes.Status200OK, ct);
+        await SendAsync(result, StatusCodes.Status200OK, ct);
     }
 }
