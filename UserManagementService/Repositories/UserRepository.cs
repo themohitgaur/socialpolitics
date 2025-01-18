@@ -29,5 +29,16 @@ namespace SocialPolitics.UserManagementService.Repositories
             var temp = await _context.Users.Find(_ => true).ToListAsync(ct);
             return temp;
         }
+
+        //public Task<bool> ValidatePassword(string userName, string password)
+        //{
+            
+        //}
+
+        async Task<User> IUserRepository.GetUserByEmailId(string emailId, CancellationToken ct = default)
+        {
+            var temp = await _context.Users.Find(x=>x.Email == emailId).FirstOrDefaultAsync(ct);
+            return temp;
+        }
     }
 }

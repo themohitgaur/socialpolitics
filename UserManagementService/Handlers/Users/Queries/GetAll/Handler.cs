@@ -12,9 +12,7 @@ internal class Handler(IUserRepository userRepository, IMapper mapper) : IReques
     async Task<Response> IRequestHandler<Request, Response>.Handle(Request request, CancellationToken cancellation)
     {
         var users = await _userRepository.GetAllUserAsync(cancellation);
-        // Mapping a list using AutoMapper
         List<UserApiModel> userApiModels = _mapper.Map<List<UserApiModel>>(users);
-
         return new Response(userApiModels);
     }
 }
