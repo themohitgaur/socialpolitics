@@ -32,20 +32,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.Configure<ServiceSettings>(builder.Configuration.GetSection("Database"));
 
-// Register MongoDB client and database
-builder.Services.AddSingleton<MongoClient>(s =>
-{
-    var settings = s.GetRequiredService<IOptions<ServiceSettings>>().Value;
-    return new MongoClient(settings.ConnectionString);
-});
-
-builder.Services.AddSingleton<IMongoDatabase>(s =>
-{
-    var settings = s.GetRequiredService<IOptions<ServiceSettings>>().Value;
-    var client = s.GetRequiredService<MongoClient>();
-    return client.GetDatabase(settings.DatabaseName);
-});
-
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<UserManagementContext>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
