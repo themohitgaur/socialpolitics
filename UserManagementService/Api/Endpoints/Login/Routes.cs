@@ -2,5 +2,5 @@
 
 public class Routes
 {
-    public const String Login = $"{nameof(Api)}/auth/{nameof(Login)}";
+    public const String Login = $"{nameof(Api)}/{nameof(Users)}/auth/{nameof(Login)}";
 }

@@ -8,7 +8,7 @@ public class UserManagementContext
 {
     private readonly IMongoDatabase _database;
 
-    public UserManagementContext(IOptions<ServiceSettings> options)
+    public UserManagementContext(IOptions<DatabaseSettings> options)
     {
         var serviceSettings = options.Value;
 
