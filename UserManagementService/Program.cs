@@ -1,13 +1,12 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 using SocialPolitics.UserManagementService;
 using SocialPolitics.UserManagementService.Infrastructure.Data.Context;
 using SocialPolitics.UserManagementService.Infrastructure.Data.Models;
 using SocialPolitics.UserManagementService.Repositories;
 using SocialPolitics.UserManagementService.Repositories.Interfaces;
+using SocialPolitics.Core;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,9 +29,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.Configure<ServiceSettings>(builder.Configuration.GetSection("Database"));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+
+//Custom service registration
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddSingleton<UserManagementContext>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 var app = builder.Build();

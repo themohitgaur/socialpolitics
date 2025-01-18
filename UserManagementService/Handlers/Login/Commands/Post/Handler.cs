@@ -3,12 +3,14 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using SocialPolitics.UserManagementService.Repositories.Interfaces;
 using SocialPolitics.UserManagementService.Infrastructure.Data.Models;
+using SocialPolitics.UserManagementService.Repositories;
 
 namespace SocialPolitics.UserManagementService.Handlers.Login.Commands.Post;
 
-internal class Handler(IUserRepository userRepository, IPasswordHasher<User> passwordHasher) : IRequestHandler<Request, Response>
+internal class Handler(IUserRepository userRepository, ITokenService tokenService, IPasswordHasher<User> passwordHasher) : IRequestHandler<Request, Response>
 {
     private readonly IUserRepository _userRepository = userRepository;
+    private readonly ITokenService _tokenService  = tokenService;
     private readonly IPasswordHasher<User> _passwordHasher = passwordHasher;
     async Task<Response> IRequestHandler<Request, Response>.Handle(Request request, CancellationToken cancellation)
     {
@@ -24,6 +26,7 @@ internal class Handler(IUserRepository userRepository, IPasswordHasher<User> pas
             throw new Exception("Wrong Password Provided");
         }
         //Auth Token Generation algorithm
-        return new Response("Token");
+        var token = _tokenService.GenerateToken(request.EmailId, user.Role);
+        return new Response(token);
     }
 }
